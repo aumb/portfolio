@@ -8,35 +8,40 @@ class CompaniesWidget extends StatelessWidget {
     final double height = MediaQuery.of(context).size.height;
     final double width = MediaQuery.of(context).size.width;
     return BSColumn(
-      padding: EdgeInsets.symmetric(horizontal: width * 0.2),
       mainAxisAlignment: MainAxisAlignment.center,
       height: height * 0.8,
       children: [
-        Text(
-          "Companies I have worked with",
-          style: Theme.of(context).textTheme.headline4,
-          textAlign: TextAlign.center,
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+          child: Text(
+            "Companies I have worked with",
+            style: Theme.of(context).textTheme.headline4,
+            textAlign: TextAlign.center,
+          ),
         ),
         SizedBox(height: 60),
-        Wrap(
-          spacing: 36,
-          runSpacing: 16,
-          alignment: WrapAlignment.center,
-          crossAxisAlignment: WrapCrossAlignment.center,
-          children: [
-            Image.asset(
-              Images.ubanquity,
-              width: 200,
-            ),
-            Image.asset(
-              Images.inboundHorizons,
-              width: 200,
-            ),
-            Image.asset(
-              Images.easyBeirut,
-              width: 200,
-            ),
-          ],
+        Padding(
+          padding: EdgeInsets.symmetric(horizontal: width * 0.2),
+          child: Wrap(
+            spacing: 36,
+            runSpacing: 24,
+            alignment: WrapAlignment.center,
+            crossAxisAlignment: WrapCrossAlignment.center,
+            children: [
+              Image.asset(
+                Images.ubanquity,
+                width: 200,
+              ),
+              Image.asset(
+                Images.inboundHorizons,
+                width: 200,
+              ),
+              Image.asset(
+                Images.easyBeirut,
+                width: 200,
+              ),
+            ],
+          ),
         )
       ],
     );

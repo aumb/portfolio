@@ -21,11 +21,85 @@ class PortfolioCard extends StatefulWidget {
 
 class _PortfolioCardState extends State<PortfolioCard> {
   Widget hoverChild = SizedBox.shrink();
+  bool hover = false;
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {},
+      onTap: () {
+        hover = !hover;
+        if (hover) {
+          hoverChild = Container(
+            color: Colors.black.withOpacity(0.6),
+            padding: const EdgeInsets.symmetric(
+              vertical: 28.0,
+              horizontal: 34.0,
+            ),
+            height: 213,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(widget.title ?? '',
+                    textAlign: TextAlign.center,
+                    style: Theme.of(context).textTheme.bodyText2.copyWith(
+                          fontFamily: 'Russo One',
+                        )),
+                OutlineButton(
+                  highlightElevation: 0,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(25),
+                  ),
+                  borderSide:
+                      BorderSide(color: CustomColors.accentColor, width: 2),
+                  onPressed: widget.onTap,
+                  child: (widget.underDevelopment ?? true)
+                      ? Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              "Under Development",
+                              style:
+                                  Theme.of(context).textTheme.button.copyWith(
+                                        color: CustomColors.white87,
+                                        fontFamily: 'Russo One',
+                                      ),
+                            ),
+                            SizedBox(width: 4),
+                            Icon(
+                              MdiIcons.hammerScrewdriver,
+                              color: CustomColors.accentColor,
+                            ),
+                          ],
+                        )
+                      : Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              "Visit Website",
+                              style:
+                                  Theme.of(context).textTheme.button.copyWith(
+                                        color: CustomColors.white87,
+                                        fontFamily: 'Russo One',
+                                      ),
+                            ),
+                            Icon(
+                              Icons.chevron_right,
+                              color: CustomColors.accentColor,
+                            )
+                          ],
+                        ),
+                ),
+              ],
+            ),
+          );
+          setState(() {});
+        } else {
+          hoverChild = SizedBox.shrink();
+          setState(() {});
+        }
+      },
       onHover: (hover) {
+        this.hover = hover;
         if (hover) {
           hoverChild = Container(
             color: Colors.black.withOpacity(0.6),

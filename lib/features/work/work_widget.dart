@@ -7,9 +7,10 @@ class WorkWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BSColumn(
+      padding: const EdgeInsets.symmetric(horizontal: 8),
       children: [
         FractionalTranslation(
-          translation: Offset(0, -0.2),
+          translation: Offset(0, -0.1),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -26,12 +27,12 @@ class WorkWidget extends StatelessWidget {
                   "TypeScript",
                 ],
                 tools: [
+                  "Flutter",
+                  "Laravel",
+                  "Angular",
                   "VS Code",
                   "Github",
                   "Gitlab",
-                  "Flutter",
-                  "Laravel",
-                  "Angular"
                 ],
               ),
             ],
