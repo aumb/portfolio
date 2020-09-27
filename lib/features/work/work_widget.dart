@@ -11,31 +11,28 @@ class WorkWidget extends StatelessWidget {
       children: [
         FractionalTranslation(
           translation: Offset(0, -0.1),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              WorkCard(
-                image: Images.sourceCode,
-                workType: "Front-end Developer",
-                languages: [
-                  "Dart",
-                  "Java",
-                  "HTML",
-                  "CSS",
-                  "Javascript",
-                  "PHP",
-                  "TypeScript",
-                ],
-                tools: [
-                  "Flutter",
-                  "Laravel",
-                  "Angular",
-                  "VS Code",
-                  "Github",
-                  "Gitlab",
-                ],
-              ),
-            ],
+          child: Center(
+            child: WorkCard(
+              image: Images.sourceCode,
+              workType: "Front-end Developer",
+              languages: [
+                "Dart",
+                "Java",
+                "HTML",
+                "CSS",
+                "Javascript",
+                "PHP",
+                "TypeScript",
+              ],
+              tools: [
+                "Flutter",
+                "Laravel",
+                "Angular",
+                "VS Code",
+                "Github",
+                "Gitlab",
+              ],
+            ),
           ),
         )
       ],

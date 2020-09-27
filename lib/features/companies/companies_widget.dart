@@ -5,11 +5,13 @@ import 'package:portfolio/core/core.dart';
 class CompaniesWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final double height = MediaQuery.of(context).size.height;
     final double width = MediaQuery.of(context).size.width;
     return BSColumn(
       mainAxisAlignment: MainAxisAlignment.center,
-      height: height * 0.8,
+      padding: const EdgeInsets.symmetric(
+        vertical: 80,
+        horizontal: 24,
+      ),
       children: [
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16.0),

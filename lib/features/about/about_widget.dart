@@ -7,10 +7,10 @@ class AboutWidget extends StatelessWidget {
     final double height = MediaQuery.of(context).size.height;
     final double width = MediaQuery.of(context).size.width;
     return BSColumn(
-      padding: EdgeInsets.symmetric(horizontal: width * 0.2),
+      padding:
+          EdgeInsets.symmetric(horizontal: width * 0.2, vertical: height * 0.2),
       mainAxisAlignment: MainAxisAlignment.center,
       backgroundColor: Theme.of(context).accentColor,
-      height: height * 0.8,
       children: [
         Text(
           "Hi, I’m Mathiew. Nice to meet you.",

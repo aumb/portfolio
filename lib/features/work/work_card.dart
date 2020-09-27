@@ -20,6 +20,7 @@ class WorkCard extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 50),
         child: Column(
           mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Image.asset(
               image,
@@ -30,6 +31,7 @@ class WorkCard extends StatelessWidget {
             Text(
               workType,
               style: Theme.of(context).textTheme.headline6,
+              textAlign: TextAlign.center,
             ),
             SizedBox(height: 24),
             Text(
@@ -43,6 +45,7 @@ class WorkCard extends StatelessWidget {
             SizedBox(height: 50),
             Text(
               "Tools & Frameworks:",
+              textAlign: TextAlign.center,
               style: TextStyle(
                 color: Theme.of(context).accentColor,
               ),
@@ -55,7 +58,7 @@ class WorkCard extends StatelessWidget {
     );
   }
 
-  Widget _buildLanguages(BuildContext context) {
+  Text _buildLanguages(BuildContext context) {
     String languages = '';
     for (int i = 0; i < this.languages.length; i++) {
       languages += this.languages[i];
@@ -64,6 +67,7 @@ class WorkCard extends StatelessWidget {
     return Text(
       languages,
       style: Theme.of(context).textTheme.bodyText1,
+      textAlign: TextAlign.center,
     );
   }
 

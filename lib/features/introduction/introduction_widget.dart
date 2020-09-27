@@ -8,6 +8,9 @@ class IntroductionWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final double size = MediaQuery.of(context).size.height;
     return BSColumn(
+      padding: const EdgeInsets.symmetric(
+        horizontal: 24,
+      ),
       height: size,
       children: [
         SizedBox(height: 56),
