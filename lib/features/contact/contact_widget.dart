@@ -2,9 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:portfolio/components/bootstrap/bootstrap_column.dart';
 import 'package:portfolio/components/contact_button.dart';
+import 'package:portfolio/core/core.dart';
 import 'package:portfolio/core/utils/utils.dart';
 
 class ContactWidget extends StatelessWidget {
+  final PersonalInformation personalInformation;
+
+  const ContactWidget({this.personalInformation});
+
   @override
   Widget build(BuildContext context) {
     final double height = MediaQuery.of(context).size.height;
@@ -16,7 +21,7 @@ class ContactWidget extends StatelessWidget {
       height: height * 0.8,
       children: [
         Text(
-          "Living and learning one day at a time.",
+          personalInformation?.contactTitle,
           style: Theme.of(context)
               .textTheme
               .headline4
@@ -25,7 +30,7 @@ class ContactWidget extends StatelessWidget {
         ),
         SizedBox(height: 44),
         Text(
-          "Get in touch",
+          personalInformation?.contactSubtitle,
           style: Theme.of(context)
               .textTheme
               .headline5
@@ -38,63 +43,82 @@ class ContactWidget extends StatelessWidget {
           spacing: 16,
           runSpacing: 8,
           children: [
-            ContactButton(
-              size: 40,
-              icon: MdiIcons.github,
-              onPressed: () {
-                launchUrls(scheme: 'https', path: "https://github.com/aumb");
-              },
-            ),
-            ContactButton(
-              disabled: false,
-              isLoading: false,
-              size: 40,
-              icon: MdiIcons.linkedin,
-              onPressed: () {
-                launchUrls(
+            if (isNotEmpty(personalInformation?.githubUrl))
+              ContactButton(
+                size: 40,
+                icon: MdiIcons.github,
+                onPressed: () {
+                  launchUrls(
                     scheme: 'https',
-                    path:
-                        "https://www.linkedin.com/in/mathiew-abbas-3b2b5b112");
-              },
-            ),
-            ContactButton(
-              disabled: false,
-              isLoading: false,
-              size: 40,
-              icon: MdiIcons.email,
-              onPressed: () {
-                launchUrls(scheme: 'mailto', path: "mathiewabbas@gmail.com");
-              },
-            ),
-            ContactButton(
-              disabled: false,
-              isLoading: false,
-              size: 40,
-              icon: MdiIcons.facebook,
-              onPressed: () {
-                launchUrls(
+                    path: personalInformation.githubUrl,
+                  );
+                },
+              ),
+            if (isNotEmpty(personalInformation?.linkedInUrl))
+              ContactButton(
+                disabled: false,
+                isLoading: false,
+                size: 40,
+                icon: MdiIcons.linkedin,
+                onPressed: () {
+                  launchUrls(
                     scheme: 'https',
-                    path: "https://facebook.com/mathiew.abbas");
-              },
-            ),
-            ContactButton(
-              disabled: false,
-              isLoading: false,
-              size: 40,
-              icon: MdiIcons.instagram,
-              onPressed: () {
-                launchUrls(
+                    path: personalInformation.linkedInUrl,
+                  );
+                },
+              ),
+            if (isNotEmpty(personalInformation?.email))
+              ContactButton(
+                disabled: false,
+                isLoading: false,
+                size: 40,
+                icon: MdiIcons.email,
+                onPressed: () {
+                  launchUrls(
+                    scheme: 'mailto',
+                    path: personalInformation.email,
+                  );
+                },
+              ),
+            if (isNotEmpty(personalInformation?.facebookUrl))
+              ContactButton(
+                disabled: false,
+                isLoading: false,
+                size: 40,
+                icon: MdiIcons.facebook,
+                onPressed: () {
+                  launchUrls(
                     scheme: 'https',
-                    path: "https://instagram.com/mathiewabbas");
-              },
-            ),
-            // ContactButton(
-            //   disabled: false,
-            //   isLoading: false,
-            //   size: 40,
-            //   icon: MdiIcons.twitter,
-            //   onPressed: () {},
-            // ),
+                    path: personalInformation.facebookUrl,
+                  );
+                },
+              ),
+            if (isNotEmpty(personalInformation?.instagramUrl))
+              ContactButton(
+                disabled: false,
+                isLoading: false,
+                size: 40,
+                icon: MdiIcons.instagram,
+                onPressed: () {
+                  launchUrls(
+                    scheme: 'https',
+                    path: personalInformation.instagramUrl,
+                  );
+                },
+              ),
+            if (isNotEmpty(personalInformation?.twitterUrl))
+              ContactButton(
+                disabled: false,
+                isLoading: false,
+                size: 40,
+                icon: MdiIcons.twitter,
+                onPressed: () {
+                  launchUrls(
+                    scheme: 'https',
+                    path: personalInformation.twitterUrl,
+                  );
+                },
+              ),
           ],
         )
       ],

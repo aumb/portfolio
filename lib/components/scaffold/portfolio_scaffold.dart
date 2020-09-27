@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:portfolio/components/scaffold/loading_animation.dart';
 import 'package:portfolio/core/core.dart';
 
 class PortfolioScaffold extends StatefulWidget {
@@ -105,6 +106,7 @@ class PortfolioScaffoldState extends State<PortfolioScaffold> {
     Widget pageBody = SizedBox.shrink();
     switch (widget.state.pageState) {
       case PageState.loading:
+        pageBody = LoadingAnimation();
         break;
       case PageState.loaded:
         if (widget.builder != null) {

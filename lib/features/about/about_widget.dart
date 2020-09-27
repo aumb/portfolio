@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:portfolio/components/bootstrap/bootstrap_column.dart';
+import 'package:portfolio/core/core.dart';
 
 class AboutWidget extends StatelessWidget {
+  final PersonalInformation personalInformation;
+
+  const AboutWidget({this.personalInformation});
+
   @override
   Widget build(BuildContext context) {
     final double height = MediaQuery.of(context).size.height;
@@ -13,7 +18,7 @@ class AboutWidget extends StatelessWidget {
       backgroundColor: Theme.of(context).accentColor,
       children: [
         Text(
-          "Hi, I’m Mathiew. Nice to meet you.",
+          personalInformation?.aboutTitle,
           style: Theme.of(context)
               .textTheme
               .headline4
@@ -22,7 +27,7 @@ class AboutWidget extends StatelessWidget {
         ),
         SizedBox(height: 24),
         Text(
-          "Since beginning my journey as a front-end developer nearly 2 years ago, I've done remote work for companies, consulted for startups, and collaborated with talented people to create digital products for both business and consumer use. I'm very out-going, curious by nature, and a problem solver.",
+          personalInformation?.about,
           style: Theme.of(context)
               .textTheme
               .headline5

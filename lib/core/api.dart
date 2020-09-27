@@ -4,4 +4,5 @@ class API {
   static String job = "job";
   static String personalInformation = "personal_information";
   static String education = "education";
+  static String profilePicture = "profilepicture";
 }
