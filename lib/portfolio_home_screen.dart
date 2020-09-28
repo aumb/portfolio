@@ -15,7 +15,7 @@ class PortfolioHomeScreen extends StatefulWidget {
 
 class _PortfolioHomeScreenState extends State<PortfolioHomeScreen> {
   HomeController controller;
-  double cacheExtent;
+  double cacheExtent = 6000;
 
   @override
   void initState() {
