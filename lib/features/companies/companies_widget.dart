@@ -1,11 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:portfolio/components/bootstrap/bootstrap_column.dart';
 import 'package:portfolio/core/core.dart';
+import 'package:portfolio/features/companies/company_card.dart';
 
-class CompaniesWidget extends StatelessWidget {
+class CompaniesWidget extends StatefulWidget {
+  final List<Job> jobs;
+
+  const CompaniesWidget({this.jobs});
+
+  @override
+  _CompaniesWidgetState createState() => _CompaniesWidgetState();
+}
+
+class _CompaniesWidgetState extends State<CompaniesWidget> {
+  List<Job> _jobs;
+
+  @override
+  void initState() {
+    super.initState();
+    _jobs = widget.jobs;
+    _jobs.sort((b, a) => a.startDate.compareTo(b.startDate));
+  }
+
   @override
   Widget build(BuildContext context) {
-    final double width = MediaQuery.of(context).size.width;
     return BSColumn(
       mainAxisAlignment: MainAxisAlignment.center,
       padding: const EdgeInsets.symmetric(
@@ -22,28 +40,18 @@ class CompaniesWidget extends StatelessWidget {
           ),
         ),
         SizedBox(height: 60),
-        Padding(
-          padding: EdgeInsets.symmetric(horizontal: width * 0.2),
-          child: Wrap(
-            spacing: 36,
-            runSpacing: 24,
-            alignment: WrapAlignment.center,
-            crossAxisAlignment: WrapCrossAlignment.center,
-            children: [
-              Image.asset(
-                Images.ubanquity,
-                width: 200,
-              ),
-              Image.asset(
-                Images.inboundHorizons,
-                width: 200,
-              ),
-              Image.asset(
-                Images.easyBeirut,
-                width: 200,
-              ),
-            ],
-          ),
+        Wrap(
+          spacing: 16,
+          runSpacing: 24,
+          alignment: WrapAlignment.center,
+          crossAxisAlignment: WrapCrossAlignment.center,
+          children: [
+            ..._jobs
+                .map((e) => CompanyCard(
+                      job: e,
+                    ))
+                .toList(),
+          ],
         )
       ],
     );

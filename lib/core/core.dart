@@ -15,6 +15,7 @@ export 'models/information.dart';
 export 'models/education.dart';
 export 'models/job.dart';
 export 'models/personal_information.dart';
+export 'models/recent_work.dart';
 
 //Utils
 export 'utils/custom_colors.dart';

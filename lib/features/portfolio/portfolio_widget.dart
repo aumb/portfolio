@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:portfolio/components/bootstrap/bootstrap_column.dart';
 import 'package:portfolio/core/core.dart';
-import 'package:portfolio/core/utils/utils.dart';
 import 'package:portfolio/features/portfolio/portfolio_card.dart';
 
 class PortfolioWidget extends StatelessWidget {
+  final List<RecentWork> recentWork;
+
+  const PortfolioWidget({this.recentWork});
+
   @override
   Widget build(BuildContext context) {
     return BSColumn(
@@ -34,30 +37,11 @@ class PortfolioWidget extends StatelessWidget {
           alignment: WrapAlignment.center,
           spacing: 16,
           children: [
-            PortfolioCard(
-              title:
-                  "High end mobile banking integration for customers and banks",
-              image: Images.ubanquity,
-              underDevelopment: false,
-              onTap: () {
-                launchUrls(scheme: 'https', path: 'https://www.ubanquity.com/');
-              },
-            ),
-            PortfolioCard(
-              title: "Stationary portfolio & company information",
-              image: Images.easyBeirut,
-              underDevelopment: false,
-              onTap: () {
-                launchUrls(
-                    scheme: 'https', path: 'https://www.easybeirut.com/');
-              },
-            ),
-            PortfolioCard(
-              title: "Search engine for gaming lounges and esports",
-              image: Images.gameCircle,
-              onTap: () {},
-              underDevelopment: true,
-            ),
+            ...recentWork
+                .map(
+                  (e) => PortfolioCard(recentWork: e),
+                )
+                .toList(),
           ],
         ),
       ],

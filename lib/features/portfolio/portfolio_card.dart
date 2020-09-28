@@ -1,18 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:portfolio/core/core.dart';
+import 'package:portfolio/core/utils/utils.dart';
 
 class PortfolioCard extends StatefulWidget {
-  final String image;
-  final String title;
-  final Function onTap;
-  final bool underDevelopment;
+  final RecentWork recentWork;
 
   const PortfolioCard({
-    this.image,
-    this.title,
-    this.onTap,
-    this.underDevelopment,
+    this.recentWork,
   });
 
   @override
@@ -39,56 +34,59 @@ class _PortfolioCardState extends State<PortfolioCard> {
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(widget.title ?? '',
+                Text(widget.recentWork.description ?? '',
                     textAlign: TextAlign.center,
                     style: Theme.of(context).textTheme.bodyText2.copyWith(
                           fontFamily: 'Russo One',
                         )),
                 OutlineButton(
-                  highlightElevation: 0,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(25),
-                  ),
-                  borderSide:
-                      BorderSide(color: CustomColors.accentColor, width: 2),
-                  onPressed: widget.onTap,
-                  child: (widget.underDevelopment ?? true)
-                      ? Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              "Under Development",
-                              style:
-                                  Theme.of(context).textTheme.button.copyWith(
-                                        color: CustomColors.white87,
-                                        fontFamily: 'Russo One',
-                                      ),
-                            ),
-                            SizedBox(width: 4),
-                            Icon(
-                              MdiIcons.hammerScrewdriver,
-                              color: CustomColors.accentColor,
-                            ),
-                          ],
-                        )
-                      : Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              "Visit Website",
-                              style:
-                                  Theme.of(context).textTheme.button.copyWith(
-                                        color: CustomColors.white87,
-                                        fontFamily: 'Russo One',
-                                      ),
-                            ),
-                            Icon(
-                              Icons.chevron_right,
-                              color: CustomColors.accentColor,
-                            )
-                          ],
-                        ),
-                ),
+                    highlightElevation: 0,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(25),
+                    ),
+                    borderSide:
+                        BorderSide(color: CustomColors.accentColor, width: 2),
+                    onPressed: () {
+                      if (widget.recentWork.url?.contains('.com') ?? false)
+                        launchUrls(
+                            scheme: 'https', path: widget.recentWork.url);
+                    },
+                    child: ((widget.recentWork.url?.contains('.com') ?? false))
+                        ? Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                "Visit Website",
+                                style:
+                                    Theme.of(context).textTheme.button.copyWith(
+                                          color: CustomColors.white87,
+                                          fontFamily: 'Russo One',
+                                        ),
+                              ),
+                              Icon(
+                                Icons.chevron_right,
+                                color: CustomColors.accentColor,
+                              )
+                            ],
+                          )
+                        : Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                "Under Development",
+                                style:
+                                    Theme.of(context).textTheme.button.copyWith(
+                                          color: CustomColors.white87,
+                                          fontFamily: 'Russo One',
+                                        ),
+                              ),
+                              SizedBox(width: 4),
+                              Icon(
+                                MdiIcons.hammerScrewdriver,
+                                color: CustomColors.accentColor,
+                              ),
+                            ],
+                          )),
               ],
             ),
           );
@@ -112,7 +110,7 @@ class _PortfolioCardState extends State<PortfolioCard> {
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(widget.title ?? '',
+                Text(widget.recentWork.description ?? '',
                     textAlign: TextAlign.center,
                     style: Theme.of(context).textTheme.bodyText2.copyWith(
                           fontFamily: 'Russo One',
@@ -124,9 +122,29 @@ class _PortfolioCardState extends State<PortfolioCard> {
                   ),
                   borderSide:
                       BorderSide(color: CustomColors.accentColor, width: 2),
-                  onPressed: widget.onTap,
-                  child: (widget.underDevelopment ?? true)
+                  onPressed: () {
+                    if (widget.recentWork.url?.contains('.com') ?? false)
+                      launchUrls(scheme: 'https', path: widget.recentWork.url);
+                  },
+                  child: (((widget.recentWork.url?.contains('.com') ?? false))
                       ? Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              "Visit Website",
+                              style:
+                                  Theme.of(context).textTheme.button.copyWith(
+                                        color: CustomColors.white87,
+                                        fontFamily: 'Russo One',
+                                      ),
+                            ),
+                            Icon(
+                              Icons.chevron_right,
+                              color: CustomColors.accentColor,
+                            )
+                          ],
+                        )
+                      : Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text(
@@ -143,24 +161,7 @@ class _PortfolioCardState extends State<PortfolioCard> {
                               color: CustomColors.accentColor,
                             ),
                           ],
-                        )
-                      : Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              "Visit Website",
-                              style:
-                                  Theme.of(context).textTheme.button.copyWith(
-                                        color: CustomColors.white87,
-                                        fontFamily: 'Russo One',
-                                      ),
-                            ),
-                            Icon(
-                              Icons.chevron_right,
-                              color: CustomColors.accentColor,
-                            )
-                          ],
-                        ),
+                        )),
                 ),
               ],
             ),
@@ -185,13 +186,13 @@ class _PortfolioCardState extends State<PortfolioCard> {
     return Stack(
       fit: StackFit.expand,
       children: [
-        Align(
-          alignment: Alignment.center,
-          child: Image.asset(
-            widget.image,
-            width: 150,
-          ),
-        ),
+        FadeInImage(
+            fit: BoxFit.cover,
+            placeholder: AssetImage(Images.loadingGif),
+            image: NetworkImage(API.host +
+                API.recentWorkPicture +
+                "/" +
+                widget.recentWork.id.toString())),
         hoverChild
       ],
     );

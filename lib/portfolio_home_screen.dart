@@ -15,6 +15,7 @@ class PortfolioHomeScreen extends StatefulWidget {
 
 class _PortfolioHomeScreenState extends State<PortfolioHomeScreen> {
   HomeController controller;
+  double cacheExtent;
 
   @override
   void initState() {
@@ -31,7 +32,10 @@ class _PortfolioHomeScreenState extends State<PortfolioHomeScreen> {
         builder: (context, snapshot) {
           return RefreshIndicator(
             color: Theme.of(context).primaryColor,
-            onRefresh: () => _init(isRefresh: true),
+            onRefresh: () async {
+              await _init(isRefresh: true);
+              rebuildAllChildren();
+            },
             child: PortfolioScaffold(
                 state: AppState(
                   pageState: controller.pageState,
@@ -44,7 +48,7 @@ class _PortfolioHomeScreenState extends State<PortfolioHomeScreen> {
                         child: ListView(
                           physics: BouncingScrollPhysics(),
                           addAutomaticKeepAlives: true,
-                          cacheExtent: 6000.0,
+                          cacheExtent: cacheExtent,
                           scrollDirection: Axis.vertical,
                           children: [
                             IntroductionWidget(
@@ -54,8 +58,12 @@ class _PortfolioHomeScreenState extends State<PortfolioHomeScreen> {
                                 personalInformation: controller
                                     .information?.personalInformation),
                             WorkWidget(),
-                            PortfolioWidget(),
-                            CompaniesWidget(),
+                            PortfolioWidget(
+                              recentWork: controller.information.recentWork,
+                            ),
+                            CompaniesWidget(
+                              jobs: controller.information.jobs,
+                            ),
                             ContactWidget(
                               personalInformation:
                                   controller.information?.personalInformation,
@@ -68,6 +76,16 @@ class _PortfolioHomeScreenState extends State<PortfolioHomeScreen> {
                 }),
           );
         });
+  }
+
+  void rebuildAllChildren() async {
+    setState(() {
+      cacheExtent = null;
+    });
+    await Future.delayed(Duration(milliseconds: 300));
+    setState(() {
+      cacheExtent = 6000;
+    });
   }
 
   Future<void> _init({bool isRefresh}) {
