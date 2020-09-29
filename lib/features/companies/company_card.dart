@@ -16,7 +16,7 @@ class CompanyCard extends StatelessWidget {
         children: [
           Container(
             height: 600,
-            width: 320,
+            width: 340,
             padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 50),
             child: Column(
               mainAxisSize: MainAxisSize.min,
@@ -42,16 +42,16 @@ class CompanyCard extends StatelessWidget {
               ],
             ),
           ),
-          Container(
-              height: 5, width: 320, color: Theme.of(context).accentColor),
-          Positioned(
-            bottom: 0,
-            child: Container(
-                height: 5, width: 320, color: Theme.of(context).accentColor),
-          ),
+          _buildAccent(context),
+          Positioned(bottom: 0, child: _buildAccent(context)),
         ],
       ),
     );
+  }
+
+  Container _buildAccent(BuildContext context) {
+    return Container(
+        height: 5, width: 340, color: Theme.of(context).accentColor);
   }
 
   Text _buildExperience(BuildContext context) {

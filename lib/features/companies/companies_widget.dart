@@ -26,10 +26,7 @@ class _CompaniesWidgetState extends State<CompaniesWidget> {
   Widget build(BuildContext context) {
     return BSColumn(
       mainAxisAlignment: MainAxisAlignment.center,
-      padding: const EdgeInsets.symmetric(
-        vertical: 80,
-        horizontal: 24,
-      ),
+      padding: const EdgeInsets.symmetric(vertical: 80, horizontal: 24),
       children: [
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16.0),
