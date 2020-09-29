@@ -15,7 +15,6 @@ class PortfolioHomeScreen extends StatefulWidget {
 
 class _PortfolioHomeScreenState extends State<PortfolioHomeScreen> {
   HomeController controller;
-  double cacheExtent = 6000;
 
   @override
   void initState() {
@@ -32,44 +31,18 @@ class _PortfolioHomeScreenState extends State<PortfolioHomeScreen> {
         builder: (context, snapshot) {
           return RefreshIndicator(
             color: Theme.of(context).primaryColor,
-            onRefresh: () async {
-              await _init(isRefresh: true);
-              rebuildAllChildren();
-            },
+            onRefresh: () => _init(isRefresh: true),
             child: PortfolioScaffold(
                 state: AppState(
                   pageState: controller.pageState,
                   onRetry: _init,
                 ),
                 builder: (context) {
+                  precacheImage(AssetImage(Images.illustraion), context);
                   return Stack(
                     children: [
                       Scrollbar(
-                        child: ListView(
-                          physics: BouncingScrollPhysics(),
-                          addAutomaticKeepAlives: true,
-                          cacheExtent: cacheExtent,
-                          scrollDirection: Axis.vertical,
-                          children: [
-                            IntroductionWidget(
-                              information: controller.information,
-                            ),
-                            AboutWidget(
-                                personalInformation: controller
-                                    .information?.personalInformation),
-                            WorkWidget(),
-                            PortfolioWidget(
-                              recentWork: controller.information.recentWork,
-                            ),
-                            CompaniesWidget(
-                              jobs: controller.information.jobs,
-                            ),
-                            ContactWidget(
-                              personalInformation:
-                                  controller.information?.personalInformation,
-                            ),
-                          ],
-                        ),
+                        child: _buildList(),
                       ),
                     ],
                   );
@@ -78,14 +51,30 @@ class _PortfolioHomeScreenState extends State<PortfolioHomeScreen> {
         });
   }
 
-  void rebuildAllChildren() async {
-    setState(() {
-      cacheExtent = null;
-    });
-    await Future.delayed(Duration(milliseconds: 300));
-    setState(() {
-      cacheExtent = 6000;
-    });
+  ListView _buildList() {
+    return ListView(
+      physics: BouncingScrollPhysics(),
+      addAutomaticKeepAlives: true,
+      cacheExtent: controller.isLoading ? 0 : 6000.0,
+      scrollDirection: Axis.vertical,
+      children: [
+        IntroductionWidget(
+          information: controller.information,
+        ),
+        AboutWidget(
+            personalInformation: controller.information?.personalInformation),
+        WorkWidget(),
+        PortfolioWidget(
+          recentWork: controller.information.recentWork,
+        ),
+        CompaniesWidget(
+          jobs: controller.information.jobs,
+        ),
+        ContactWidget(
+          personalInformation: controller.information?.personalInformation,
+        ),
+      ],
+    );
   }
 
   Future<void> _init({bool isRefresh}) {

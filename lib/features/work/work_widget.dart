@@ -10,7 +10,7 @@ class WorkWidget extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 8),
       children: [
         FractionalTranslation(
-          translation: Offset(0, -0.1),
+          translation: Offset(0, -0.2),
           child: Center(
             child: WorkCard(
               image: Images.sourceCode,

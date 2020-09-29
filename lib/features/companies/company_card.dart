@@ -22,13 +22,12 @@ class CompanyCard extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                FadeInImage(
+                FadeInImage.assetNetwork(
                     height: 150,
                     width: 150,
                     fit: BoxFit.contain,
-                    placeholder: AssetImage(Images.loadingGif),
-                    image: NetworkImage(
-                        API.host + API.jobPicture + "/" + job.id.toString())),
+                    placeholder: Images.loadingGif,
+                    image: API.host + API.jobPicture + "/" + job.id.toString()),
                 SizedBox(height: 32),
                 Text(
                   job.title,
