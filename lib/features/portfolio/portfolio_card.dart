@@ -91,7 +91,7 @@ class _PortfolioCardState extends State<PortfolioCard> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    "Visit Website",
+                    Strings.visitWebsite,
                     style: Theme.of(context).textTheme.button.copyWith(
                           color: CustomColors.white87,
                           fontFamily: 'Russo One',
@@ -107,7 +107,7 @@ class _PortfolioCardState extends State<PortfolioCard> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    "Under Development",
+                    Strings.underDevelopment,
                     style: Theme.of(context).textTheme.button.copyWith(
                           color: CustomColors.white87,
                           fontFamily: 'Russo One',

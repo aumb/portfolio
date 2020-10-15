@@ -16,7 +16,7 @@ class PortfolioWidget extends StatelessWidget {
       padding: EdgeInsets.symmetric(vertical: 80, horizontal: 24),
       children: [
         Text(
-          "My Recent Work",
+          Strings.recentWork,
           style: Theme.of(context)
               .textTheme
               .headline4
@@ -25,7 +25,7 @@ class PortfolioWidget extends StatelessWidget {
         ),
         SizedBox(height: 24),
         Text(
-          "Here are a few projects I've worked on recently.",
+          Strings.recentWorkSubtitle,
           style: Theme.of(context)
               .textTheme
               .headline5

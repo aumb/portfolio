@@ -108,6 +108,7 @@ class AppTheme {
           ),
           button: TextStyle(
             color: CustomColors.backgroundColor,
+            fontWeight: FontWeight.w200,
           ),
           bodyText2: TextStyle(
             color: CustomColors.white87,

@@ -21,6 +21,7 @@ export 'models/recent_work.dart';
 export 'utils/custom_colors.dart';
 export 'utils/theme.dart';
 export 'utils/images.dart';
+export 'utils/strings.dart';
 
 //Controllers
 export 'controllers/home_controller.dart';

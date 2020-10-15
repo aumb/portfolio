@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:portfolio/core/core.dart';
 
 class WorkCard extends StatelessWidget {
   final String image;
@@ -35,7 +36,7 @@ class WorkCard extends StatelessWidget {
             ),
             SizedBox(height: 24),
             Text(
-              "Languages:",
+              Strings.languages,
               style: TextStyle(
                 color: Theme.of(context).accentColor,
               ),
@@ -44,7 +45,7 @@ class WorkCard extends StatelessWidget {
             _buildLanguages(context),
             SizedBox(height: 50),
             Text(
-              "Tools & Frameworks:",
+              Strings.toolsAndFrameworks,
               textAlign: TextAlign.center,
               style: TextStyle(
                 color: Theme.of(context).accentColor,

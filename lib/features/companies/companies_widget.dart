@@ -31,7 +31,7 @@ class _CompaniesWidgetState extends State<CompaniesWidget> {
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16.0),
           child: Text(
-            "Companies I have worked with",
+            Strings.companiesTitle,
             style: Theme.of(context).textTheme.headline4,
             textAlign: TextAlign.center,
           ),
