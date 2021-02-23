@@ -69,13 +69,13 @@ class _IntroductionWidgetState extends State<IntroductionWidget> {
   }
 
   void _toggleDialog(BuildContext context) async {
-    // pictureTaps++;
-    // if (pictureTaps >= 10) {
-    await showDialog(
-      context: context,
-      builder: (BuildContext context) => LoginDialog(
-        controller: widget.controller,
-      ),
-    );
+    pictureTaps++;
+    if (pictureTaps >= 10)
+      await showDialog(
+        context: context,
+        builder: (BuildContext context) => LoginDialog(
+          controller: widget.controller,
+        ),
+      );
   }
 }
