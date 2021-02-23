@@ -76,4 +76,22 @@ class PersonalInformation {
       return null;
     }
   }
+
+  Map<String, dynamic> toJson() => {
+        'id': id,
+        'name': name,
+        'job_title': jobTitle,
+        'job_subtitle': jobSubtitle,
+        'about_title': aboutTitle,
+        'about': about,
+        'contact_title': contactTitle,
+        'contact_subtitle': contactSubtitle,
+        'email': email,
+        'phone_number': phoneNumber,
+        'linked_in_url': linkedInUrl,
+        'facebook_url': facebookUrl,
+        'instagram_url': instagramUrl,
+        'twitter_url': twitterUrl,
+        'github_url': githubUrl,
+      };
 }

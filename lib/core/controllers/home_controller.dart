@@ -17,12 +17,12 @@ class HomeController {
   }
 
   //Stream getters
-  Observable<PageState> get pageStateStream => _pageState.stream;
-  Observable<bool> get isLoadingStream => _isLoading.stream;
+  Stream<PageState> get pageStateStream => _pageState.stream;
+  Stream<bool> get isLoadingStream => _isLoading.stream;
 
   //Stream combiners
-  Observable<bool> get pageStream => Observable.combineLatest2(
-      pageStateStream, isLoadingStream, (a, b) => true);
+  Stream<bool> get pageStream =>
+      Rx.combineLatest2(pageStateStream, isLoadingStream, (a, b) => true);
 
   //Getters
   PageState get pageState => _pageState.value;
@@ -34,7 +34,7 @@ class HomeController {
   }
 
   set isLoading(bool value) {
-    if (!_pageState.isClosed) _isLoading.add(value);
+    if (!_isLoading.isClosed) _isLoading.add(value);
   }
 
   //Future functions
@@ -52,6 +52,7 @@ class HomeController {
   Future<void> refreshInformation() async {
     isLoading = true;
     try {
+      CacheManager().invalidateCacheAndRestart();
       information = await _service.getInformation();
       isLoading = false;
     } catch (e) {
@@ -62,5 +63,6 @@ class HomeController {
 
   void dispose() {
     if (!_pageState.isClosed) _pageState.close();
+    if (!_isLoading.isClosed) _isLoading.close();
   }
 }

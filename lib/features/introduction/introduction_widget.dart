@@ -6,9 +6,9 @@ import 'package:portfolio/features/introduction/profile_picture.dart';
 import 'package:portfolio/features/login/login_dialog.dart';
 
 class IntroductionWidget extends StatefulWidget {
-  final Information information;
+  final HomeController controller;
 
-  const IntroductionWidget({this.information});
+  const IntroductionWidget({this.controller});
 
   @override
   _IntroductionWidgetState createState() => _IntroductionWidgetState();
@@ -33,13 +33,13 @@ class _IntroductionWidgetState extends State<IntroductionWidget> {
       children: [
         SizedBox(height: 56),
         Text(
-          widget.information?.personalInformation?.jobTitle ?? '',
+          widget.controller.information?.personalInformation?.jobTitle ?? '',
           style: Theme.of(context).textTheme.headline4,
           textAlign: TextAlign.center,
         ),
         SizedBox(height: 24),
         Text(
-          widget.information?.personalInformation?.jobSubtitle,
+          widget.controller.information?.personalInformation?.jobSubtitle,
           style: Theme.of(context).textTheme.headline5,
           textAlign: TextAlign.center,
         ),
@@ -48,7 +48,8 @@ class _IntroductionWidgetState extends State<IntroductionWidget> {
           onTap: () => _toggleDialog(context),
           mouseCursor: MouseCursor.defer,
           child: ProfilePicture(
-              size: 150, information: widget.information?.personalInformation),
+              size: 150,
+              information: widget.controller.information?.personalInformation),
         ),
         SizedBox(height: 32),
         Expanded(
@@ -67,13 +68,14 @@ class _IntroductionWidgetState extends State<IntroductionWidget> {
     );
   }
 
-  void _toggleDialog(BuildContext context) {
+  void _toggleDialog(BuildContext context) async {
     // pictureTaps++;
     // if (pictureTaps >= 10) {
-    showDialog(
+    await showDialog(
       context: context,
-      builder: (BuildContext context) => LoginDialog(),
+      builder: (BuildContext context) => LoginDialog(
+        controller: widget.controller,
+      ),
     );
   }
-  //}
 }

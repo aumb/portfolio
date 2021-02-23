@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:portfolio/core/core.dart';
-import 'package:portfolio/features/edit/edit_main_screen.dart';
 import 'package:portfolio/portfolio_home_screen.dart';
 
 void main() {
@@ -23,7 +22,7 @@ class _PortfolioState extends State<Portfolio> {
     return MaterialApp(
       title: 'Mathiew Abbas | Front-end Developer',
       theme: AppTheme().themeData,
-      home: EditMainScreen(),
+      home: PortfolioHomeScreen(),
     );
   }
 }

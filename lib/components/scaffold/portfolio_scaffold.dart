@@ -106,7 +106,8 @@ class PortfolioScaffoldState extends State<PortfolioScaffold> {
     Widget pageBody = SizedBox.shrink();
     switch (widget.state.pageState) {
       case PageState.loading:
-        pageBody = LoadingAnimation();
+        pageBody =
+            Container(width: 300, height: 300, child: LoadingAnimation());
         break;
       case PageState.loaded:
         if (widget.builder != null) {

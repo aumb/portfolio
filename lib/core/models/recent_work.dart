@@ -34,6 +34,12 @@ class RecentWork {
     }
   }
 
+  Map<String, dynamic> toJson() => {
+        'id': id,
+        'url': url,
+        'description': description,
+      };
+
   static List<RecentWork> fromJsonList(List json) {
     if (json != null && json.isNotEmpty) {
       List<RecentWork> recentWork =

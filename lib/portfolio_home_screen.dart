@@ -58,9 +58,7 @@ class _PortfolioHomeScreenState extends State<PortfolioHomeScreen> {
       cacheExtent: controller.isLoading ? 0 : 6000.0,
       scrollDirection: Axis.vertical,
       children: [
-        IntroductionWidget(
-          information: controller.information,
-        ),
+        IntroductionWidget(controller: controller),
         AboutWidget(
             personalInformation: controller.information?.personalInformation),
         WorkWidget(),

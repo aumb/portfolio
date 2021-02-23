@@ -1,5 +1,6 @@
 import 'dart:typed_data';
 
+import 'package:dio/dio.dart';
 import 'package:portfolio/core/core.dart';
 import 'package:rxdart/rxdart.dart';
 
@@ -25,7 +26,7 @@ class ProfilePictureController {
   }
 
   //Stream combiners
-  Observable<bool> get combinedStream => Observable.combineLatest2(
+  Stream<bool> get combinedStream => Rx.combineLatest2(
         isLoadingStream,
         profilePictureStream,
         (a, b) => combiner,
@@ -35,8 +36,8 @@ class ProfilePictureController {
   bool get combiner => isLoading;
 
   //Stream getters
-  Observable<bool> get isLoadingStream => _isLoading.stream;
-  Observable<Uint8List> get profilePictureStream => _profilePicture.stream;
+  Stream<bool> get isLoadingStream => _isLoading.stream;
+  Stream<Uint8List> get profilePictureStream => _profilePicture.stream;
 
   //Value getters
   bool get isLoading => _isLoading.value;
@@ -57,7 +58,7 @@ class ProfilePictureController {
     return _service.getUserProfilePicture(id).then((response) {
       profilePicture = response;
     }).catchError((e) {
-      print(e);
+      print((e as DioError).error);
       profilePicture = null;
     }).whenComplete(() {
       isLoading = false;

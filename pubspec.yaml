@@ -34,8 +34,10 @@ dependencies:
   url_launcher: ^5.7.2
   url_launcher_web: ^0.1.0
   flare_flutter: ^2.0.6
-  rxdart: ^0.21.0
+  rxdart: ^0.25.0
   intl: ^0.16.1
+  image_picker: ^0.6.7+22
+  image_picker_for_web: ^0.1.0+2
 
 dev_dependencies:
   flutter_test:

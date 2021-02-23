@@ -1,14 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:portfolio/core/core.dart';
 import 'package:portfolio/core/utils/utils.dart';
+import 'package:portfolio/features/cms/companies/add_edit_job_dialog.dart';
 
-class CompanyCard extends StatelessWidget {
+class CompanyCard extends StatefulWidget {
   final Job job;
+  final bool isEdit;
+  final Function(Job) editedJob;
 
   const CompanyCard({
     this.job,
+    this.isEdit = false,
+    this.editedJob,
   });
 
+  @override
+  _CompanyCardState createState() => _CompanyCardState();
+}
+
+class _CompanyCardState extends State<CompanyCard> {
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -27,10 +37,13 @@ class CompanyCard extends StatelessWidget {
                     width: 150,
                     fit: BoxFit.contain,
                     placeholder: Images.loadingGif,
-                    image: API.host + API.jobPicture + "/" + job.id.toString()),
+                    image: API.host +
+                        API.jobPicture +
+                        "/" +
+                        widget.job.id.toString()),
                 SizedBox(height: 32),
                 Text(
-                  job.title,
+                  widget.job.title,
                   style: Theme.of(context).textTheme.headline6,
                   textAlign: TextAlign.center,
                 ),
@@ -44,6 +57,29 @@ class CompanyCard extends StatelessWidget {
           ),
           _buildAccent(context),
           Positioned(bottom: 0, child: _buildAccent(context)),
+          if (widget.isEdit)
+            Positioned(
+              right: 0,
+              child: InkWell(
+                onTap: () async {
+                  final Job _job = await showDialog<Job>(
+                    context: context,
+                    builder: (BuildContext context) =>
+                        AddEditJobDialog(job: widget.job),
+                  );
+                  if (mounted) setState(() {});
+                  widget.editedJob(_job);
+                },
+                child: Container(
+                  padding: const EdgeInsets.all(8),
+                  decoration: BoxDecoration(
+                    color: CustomColors.backgroundColor,
+                    shape: BoxShape.circle,
+                  ),
+                  child: Icon(Icons.edit),
+                ),
+              ),
+            ),
         ],
       ),
     );
@@ -56,18 +92,18 @@ class CompanyCard extends StatelessWidget {
 
   Text _buildExperience(BuildContext context) {
     return Text(
-      job.description,
+      widget.job.description,
       style: Theme.of(context).textTheme.bodyText1,
       textAlign: TextAlign.start,
     );
   }
 
   Text _buildStartToEndDate(BuildContext context) {
-    String endDate = job.endDate != null
-        ? getStrDate(job.endDate, pattern: 'MMMM yyyy')
+    String endDate = widget.job.endDate != null
+        ? getStrDate(widget.job.endDate, pattern: 'MMMM yyyy')
         : "current";
     return Text(
-      getStrDate(job.startDate, pattern: 'MMMM yyyy').toUpperCase() +
+      getStrDate(widget.job.startDate, pattern: 'MMMM yyyy').toUpperCase() +
           " - " +
           endDate.toUpperCase(),
       style: Theme.of(context)

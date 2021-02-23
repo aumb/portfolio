@@ -38,6 +38,7 @@ class CustomTextFormField extends StatelessWidget {
   final Color fillColor;
   final bool isSmsListener;
   final bool showCounter;
+  final bool isRequired;
 
   const CustomTextFormField({
     Key key,
@@ -75,6 +76,7 @@ class CustomTextFormField extends StatelessWidget {
     this.isSmsListener = false,
     this.initialValue,
     this.showCounter = false,
+    this.isRequired = false,
   }) : super(key: key);
 
   @override
@@ -96,7 +98,7 @@ class CustomTextFormField extends StatelessWidget {
       inputFormatters: inputFormatters,
       onChanged: onChanged,
       decoration: InputDecoration(
-        labelText: labelText,
+        labelText: isRequired ? (labelText + "*") : labelText,
         prefixIcon: prefixIcon,
         prefix: prefix,
         suffixIcon: suffixIcon,

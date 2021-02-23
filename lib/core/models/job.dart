@@ -1,9 +1,12 @@
+import 'package:portfolio/core/utils/utils.dart';
+
 class Job {
   int id;
   String title;
   String companyName;
   String companyLink;
   String description;
+  String image;
   DateTime startDate;
   DateTime endDate;
   DateTime createdAt;
@@ -15,6 +18,7 @@ class Job {
     this.companyName,
     this.companyLink,
     this.description,
+    this.image,
     this.startDate,
     this.endDate,
     this.createdAt,
@@ -29,6 +33,7 @@ class Job {
         companyName: json['company_name'] != null ? json['company_name'] : null,
         companyLink: json['company_link'] != null ? json['company_link'] : null,
         description: json['description'] != null ? json['description'] : null,
+        image: json['img'] != null ? json['img'] : null,
         startDate: json['start_date'] != null
             ? DateTime.tryParse(json['start_date'])
             : null,
@@ -55,4 +60,14 @@ class Job {
       return [];
     }
   }
+
+  Map<String, dynamic> toJson() => {
+        'id': id,
+        'title': title,
+        'company_name': companyName,
+        'company_link': companyLink,
+        'description': description,
+        'start_date': getStrDate(startDate, pattern: 'yyyy-MM-dd'),
+        'end_date': getStrDate(endDate, pattern: 'yyyy-MM-dd'),
+      };
 }

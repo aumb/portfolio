@@ -7,4 +7,6 @@ class API {
   static String profilePicture = "profilepicture";
   static String recentWorkPicture = "recentworkpicture";
   static String jobPicture = "jobpicture";
+  static String recentWork = "recentwork";
+  static String login = "login";
 }
